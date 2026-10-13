@@ -1,0 +1,32 @@
+Q7: Minimise Deviation in Array (two-way greedy with max-heap)
+Input: array A[] of positive integers, max-heap, running minimum
+
+Sample 1
+  A = 1 2 3 4
+  minimum deviation = 1
+
+Sample 2
+  A = 4 1 5 20 3
+  minimum deviation = 3
+
+Sample 3
+  A = 2 10 8
+  minimum deviation = 3
+
+Validation against exhaustive search over every reachable value of every element: 2000/2000 random tests matched
+
+Time complexity analysis
+  Doubling every odd element makes all values even, so only the divide operation remains : O(n)
+  Building the max-heap                  : O(n)
+  An element x can be halved at most log2(x) <= log2(M) times, so there are at most n log M heap updates, each O(log n)
+  Total T(n) = O(n log n log M), where M is the largest value, space = O(n)
+  Correctness: only the maximum can be reduced to shrink the deviation, and the loop stops when the maximum is odd because it can no longer be halved
+
+Measured running time
+n,time_ms
+10000,0.2585
+20000,0.5904
+40000,1.2632
+80000,2.8107
+160000,6.2512
+320000,13.9137

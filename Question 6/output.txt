@@ -1,0 +1,36 @@
+Q6: Reorganise String with K-Distance Apart
+Input: string S (lowercase letters), integer K, frequency array cnt[26], array nextpos[26]
+
+Sample 1
+  S = "aabbcc", K = 3
+  result = "abcabc"
+
+Sample 2
+  S = "aaabc", K = 3
+  result = "" (impossible)
+
+Sample 3
+  S = "aaadbbcc", K = 2
+  result = "abacabcd"
+
+Sample 4
+  S = "aaabbbccc", K = 4
+  result = "" (impossible)
+
+Validation (feasibility matches exhaustive search, output obeys distance K): 3000/3000 random tests matched
+
+Time complexity analysis
+  Counting character frequencies         : O(n)
+  Each of the n positions scans the 26 letters to pick the available letter with the highest remaining count : n * O(26)
+  Total T(n) = O(26 n) = O(n), space = O(n) for the output (O(1) extra for the 26 counters)
+  With a max-heap over the sigma distinct letters the same method runs in O(n log sigma)
+  Correctness: always placing the most frequent letter that is allowed keeps the heaviest letters spread out, so if this fails no valid arrangement exists
+
+Measured running time
+n,time_ms
+100000,4.3826
+200000,8.5142
+400000,17.1170
+800000,34.3740
+1600000,68.8130
+3200000,139.1460

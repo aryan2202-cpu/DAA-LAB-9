@@ -1,0 +1,38 @@
+Q1: Fractional Knapsack with Deterioration Rate
+Input: arrays v[], w[], lambda[] (struct Item), capacity W, consumption time t
+Model: an item consumed at time t has density v/w - lambda*t, items with density <= 0 are never taken
+
+Sample 1 (W = 50, t = 2.0)
+  order  item  eff.density  taken/weight
+      1     4         5.80   15.0/15.0
+      2     1         5.00   10.0/10.0
+      3     2         4.60   20.0/20.0
+      4     3         2.00    5.0/30.0
+  maximum total value = 239.00
+
+Sample 2 (same items, later consumption time) (W = 50, t = 4.0)
+  order  item  eff.density  taken/weight
+      1     4         5.60   15.0/15.0
+      2     2         4.20   20.0/20.0
+      3     1         4.00   10.0/10.0
+      4     3         0.00    0.0/30.0
+  maximum total value = 208.00
+
+Validation against brute force over all item orders: 500/500 random tests matched
+
+Time complexity analysis
+  Computing effective densities       : O(n)
+  Sorting by effective density        : O(n log n)
+  Single greedy pass filling capacity : O(n)
+  Total T(n) = O(n) + O(n log n) + O(n) = O(n log n), space = O(n)
+  Correctness: swapping a taken item with a lower density item can only reduce the value (exchange argument)
+
+Measured running time
+n,time_ms
+10000,1.2162
+20000,2.6561
+40000,5.8342
+80000,14.2663
+160000,39.9770
+320000,115.3370
+640000,259.4980

@@ -1,0 +1,33 @@
+Q3: Minimum Number of Refuelling Stops
+Input: array of stations (distance d, fuel f) sorted by distance, target D, initial fuel F, max-heap of passed fuel amounts
+
+Sample 1
+  target D = 100, initial fuel F = 10, stations (distance, fuel): (10,60) (20,30) (30,30) (60,40)
+  minimum refuelling stops = 2, fuel taken in order: 60 40
+
+Sample 2 (unreachable)
+  target D = 100, initial fuel F = 1, stations (distance, fuel): (10,100)
+  result = -1 (target cannot be reached)
+
+Sample 3 (no stop needed)
+  target D = 60, initial fuel F = 60, stations (distance, fuel): (10,100)
+  minimum refuelling stops = 0
+
+Validation against O(n^2) dynamic programming: 1000/1000 random tests matched
+
+Time complexity analysis
+  Sorting stations by distance          : O(n log n)
+  Each station is pushed into the heap at most once  : n * O(log n)
+  Each refuelling stop pops the heap once, at most n pops : n * O(log n)
+  Total T(n) = O(n log n), space = O(n)
+  Correctness: when fuel runs out, the best choice is to have stopped at the largest station already passed (greedy choice)
+
+Measured running time
+n,time_ms
+10000,0.6610
+20000,1.4073
+40000,3.5329
+80000,6.6288
+160000,15.6585
+320000,32.7170
+640000,69.9350

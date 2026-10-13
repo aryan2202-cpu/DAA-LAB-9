@@ -1,0 +1,41 @@
+Q5: Candy Distribution (bi-directional slope greedy)
+Input: array rating[] of size n, array candy[] of size n
+
+Sample 1
+  ratings: 1 0 2
+  candies: 2 1 2
+  minimum total candies = 5
+
+Sample 2
+  ratings: 1 2 2
+  candies: 1 2 1
+  minimum total candies = 4
+
+Sample 3 (strictly rising then drop)
+  ratings: 1 3 4 5 2
+  candies: 1 2 3 4 1
+  minimum total candies = 11
+
+Sample 4 (plateau in the middle)
+  ratings: 1 2 87 87 87 2 1
+  candies: 1 2 3 1 3 2 1
+  minimum total candies = 13
+
+Validation against repeated relaxation until no rule is violated: 2000/2000 random tests matched
+
+Time complexity analysis
+  Initialising every child with 1 candy     : O(n)
+  Left to right pass (compare with left neighbour)  : O(n)
+  Right to left pass (compare with right neighbour) : O(n)
+  Summing the candies                       : O(n)
+  Total T(n) = 4 * O(n) = O(n), space = O(n)
+  Correctness: each pass enforces one neighbour rule using the smallest value possible, and the right pass never breaks the left rule because it only increases a value
+
+Measured running time
+n,time_ms
+200000,2.3905
+400000,3.8575
+800000,8.2935
+1600000,17.5085
+3200000,36.3870
+6400000,73.7000

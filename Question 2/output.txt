@@ -1,0 +1,49 @@
+Q2: Huffman Coding with canonical codebook
+Input: arrays sym[] and freq[] of size n, min-heap of tree nodes
+
+Sample 1
+  symbol  freq  length  canonical code
+       a    45       1  0
+       b    13       3  100
+       c    12       3  101
+       d    16       3  110
+       e     9       4  1110
+       f     5       4  1111
+  total bits = 224, expected length = 2.2400 bits/symbol
+
+Sample 2 (equal frequencies)
+  symbol  freq  length  canonical code
+       w     5       2  00
+       x     5       2  01
+       y     5       2  10
+       z     5       2  11
+  total bits = 40, expected length = 2.0000 bits/symbol
+
+Sample 3 (Fibonacci-like frequencies)
+  symbol  freq  length  canonical code
+       t     5       1  0
+       s     3       2  10
+       r     2       3  110
+       p     1       4  1110
+       q     1       4  1111
+  total bits = 25, expected length = 2.0833 bits/symbol
+
+Validation (cost equals independent two-queue Huffman, Kraft sum = 1, prefix-free): 500/500 random tests passed
+
+Time complexity analysis
+  Building the min-heap of n leaves   : O(n)
+  n-1 merges, each = 2 extract-min + 1 insert = 3 * O(log n) : O(n log n)
+  Computing code lengths from the tree: O(n)
+  Sorting symbols by (length, symbol) for the canonical codebook: O(n log n)
+  Total T(n) = O(n log n), space = O(n)
+  Correctness: the two least frequent symbols can always be siblings at the deepest level (greedy choice property)
+
+Measured running time (code lengths via heap)
+n,time_ms
+10000,2.0269
+20000,4.6180
+40000,10.5597
+80000,24.3310
+160000,58.9070
+320000,153.7340
+640000,584.6600

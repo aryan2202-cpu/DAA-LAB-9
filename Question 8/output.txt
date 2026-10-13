@@ -1,0 +1,37 @@
+Q8: Minimum Number of Meeting Rooms
+Input: array of intervals [start, end), separate sorted arrays starts[] and ends[]
+
+Sample 1
+  intervals: [0,30] [5,10] [15,20]
+  minimum rooms = 2
+
+Sample 2
+  intervals: [7,10] [2,4]
+  minimum rooms = 1
+
+Sample 3 (back to back meetings reuse the room)
+  intervals: [1,5] [5,8] [8,10]
+  minimum rooms = 1
+
+Sample 4
+  intervals: [1,10] [2,7] [3,19] [8,12] [10,20]
+  minimum rooms = 3
+
+Validation against O(n^2) maximum overlap count: 2000/2000 random tests matched
+
+Time complexity analysis
+  Copying start and end times            : O(n)
+  Sorting starts and sorting ends        : 2 * O(n log n)
+  Two pointer sweep (each pointer moves at most n steps) : O(n)
+  Total T(n) = O(n log n), space = O(n)
+  Correctness: a meeting needs a new room only if it starts before the earliest unfinished meeting ends, which is exactly the maximum number of overlapping meetings
+
+Measured running time
+n,time_ms
+10000,1.8009
+20000,3.9119
+40000,8.3570
+80000,17.8345
+160000,37.7180
+320000,80.4320
+640000,169.3190

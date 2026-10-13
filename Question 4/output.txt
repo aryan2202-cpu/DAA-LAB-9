@@ -1,0 +1,41 @@
+Q4: Minimum Cost to Connect Sticks
+Input: array L[] of stick lengths, min-heap
+
+Sample 1
+  sticks: 2 4 3
+  step 1: connect 2 and 3, cost 5
+  step 2: connect 4 and 5, cost 9
+  minimum total cost = 14
+
+Sample 2
+  sticks: 1 8 3 5
+  step 1: connect 1 and 3, cost 4
+  step 2: connect 4 and 5, cost 9
+  step 3: connect 8 and 9, cost 17
+  minimum total cost = 30
+
+Sample 3 (equal sticks)
+  sticks: 5 5 5 5 5
+  step 1: connect 5 and 5, cost 10
+  step 2: connect 5 and 5, cost 10
+  step 3: connect 5 and 10, cost 15
+  step 4: connect 10 and 15, cost 25
+  minimum total cost = 60
+
+Validation against exhaustive search over all merge orders: 1000/1000 random tests matched
+
+Time complexity analysis
+  Building the min-heap (heapify)       : O(n)
+  n-1 rounds, each = 2 extract-min + 1 insert = 3 * O(log n) : O(n log n)
+  Total T(n) = O(n) + O(n log n) = O(n log n), space = O(n)
+  Correctness: the two shortest sticks are paid for in every later merge of their group, so they should sit deepest in the merge tree (same argument as Huffman)
+
+Measured running time
+n,time_ms
+10000,1.4349
+20000,3.4119
+40000,7.7828
+80000,13.8777
+160000,30.4310
+320000,64.5130
+640000,137.0340
